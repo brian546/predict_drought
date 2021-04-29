@@ -17,6 +17,8 @@ df['fips'].nunique()
 
 # %%
 
+df.info()
+
 # find out if any multicolinearity
 
 # T2M highly collerated (corr > 0.7) with QV2M,T2MDEW,T2MWET, T2M_MAX, T2M_MIN, and TS 
@@ -52,11 +54,9 @@ new_df = new_df[(df['date'] > pd.Timestamp(2019,1,1)) & (df['date'] < pd.Timesta
 # get the mean of data per week 
 week_df = new_df.groupby('fips').resample('W-TUE', on='date').mean()
 
-print(week_df)
+week_df = week_df.drop(columns=['fips']).reset_index()
+
+# %%
+week_df
 # %%
 week_df['score'].isnull().sum()
-
-
-# %%
-
-# %%
