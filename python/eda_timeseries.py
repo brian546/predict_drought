@@ -49,22 +49,29 @@ print(new_df[new_df['date'].dt.weekday == 1]['score'].isnull().sum())
 
 new_df = new_df[(df['date'] > pd.Timestamp(2019,1,1)) & (df['date'] < pd.Timestamp(2020,12,30))]
 
+
+# %%
+
+new_df
 # %%
 
 # get the mean of data per week 
-week_df = df.groupby('fips').resample('W-TUE', on='date').mean()
+week_df = new_df.groupby('fips').resample('W-TUE', on='date', label='right',closed='right').mean()
 
 week_df = week_df.drop(columns=['fips']).reset_index()
 
-week_df['score'] = week_df['score'].round()
 
 # %%
 week_df
 # %%
-week_df['score'].isnull().sum()
+week_df[week_df['score'].isnull()]
+
 
 # %%
-# week_df.to_csv('../data/week_score.csv', index=False)
+week_df['score'] = week_df['score'].round().astype(int)
+
+# %%
+week_df.to_csv('../data/week_score.csv', index=False)
 
 # plt.figure(figsize=(20,20))
 
@@ -72,5 +79,8 @@ week_df['score'].isnull().sum()
 # %%
 
 week_df['score'].value_counts()
+
+# %%
+
 
 # %%
