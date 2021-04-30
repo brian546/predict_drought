@@ -35,8 +35,7 @@ df['date'].head()
 
 # %%
 
-new_df = df[['fips','date', 'PRECTOT', 'PS', 'T2M', 'T2M_RANGE', 'WS10M', 'WS50M_RANGE','score']]
-
+new_df = df
 # %%
 
 # proving that the dought score was released every Tuesday, reviewing the dought condtion in the past week
