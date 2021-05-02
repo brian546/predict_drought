@@ -11,7 +11,6 @@ print(df.info())
 print(df.isnull().sum())
 
 # %%
-
 # number of regions
 df['fips'].nunique()
 
@@ -61,13 +60,25 @@ week_df = week_df.drop(columns=['fips']).reset_index()
 
 
 # %%
-week_df
+# plt hist of drought
+week_df['score'].plot.hist(bins=50)
+plt.title('Histogram of level of drought')
+plt.xlabel('Class')
+
 # %%
+
+# check for week dataframe having any null score
 week_df[week_df['score'].isnull()]
 
 
 # %%
+
+# round score column of week dataframe and make bar plot
 week_df['score'] = week_df['score'].round().astype(int)
+week_df['score'].plot.hist(bins=50)
+plt.title('Histogram of level of drought after rounding')
+plt.xlabel('Class')
+plt.xticks(rotation=0)
 
 # %%
 week_df.to_csv('../data/week_score.csv', index=False)
@@ -77,9 +88,8 @@ week_df.to_csv('../data/week_score.csv', index=False)
 # sns.heatmap(week_df.corr(),annot=True)
 # %%
 
-week_df['score'].value_counts()
+week_df['score'].value_counts().plot.bar()
 
 # %%
-
 
 # %%
