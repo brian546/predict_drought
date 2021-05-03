@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import datetime
 # %%
-df = pd.read_csv('../data/test_timeseries/test_timeseries.csv',parse_dates=['date'])
+df = pd.read_csv('/Users/hungyanyi/Documents/GitHub/predict_drought/data/test_timeseries.csv',parse_dates=['date'])
 print(df.info())
 # %%
 print(df.isnull().sum())
@@ -34,7 +34,9 @@ df['date'].head()
 
 # %%
 
-new_df = df
+new_df = df[['fips','date', 'PRECTOT', 'PS', 'T2M', 'T2M_RANGE', 'WS10M', 'WS50M_RANGE','score']]
+#new_df = df
+
 # %%
 
 # proving that the dought score was released every Tuesday, reviewing the dought condtion in the past week
@@ -81,15 +83,19 @@ plt.xlabel('Class')
 plt.xticks(rotation=0)
 
 # %%
-week_df.to_csv('../data/week_score.csv', index=False)
+week_df.to_csv('/Users/hungyanyi/Documents/GitHub/predict_drought/data/week_score.csv', index=False)
 
-# plt.figure(figsize=(20,20))
+plt.figure(figsize=(20,20))
 
-# sns.heatmap(week_df.corr(),annot=True)
+sns.heatmap(week_df.corr(),annot=True)
 # %%
 
 week_df['score'].value_counts().plot.bar()
 
 # %%
 
+# %%
+df.head()
+# %%
+df.shape
 # %%
