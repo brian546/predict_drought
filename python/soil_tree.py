@@ -315,10 +315,14 @@ y_pred_acc_t = grid_dtc_acc.predict(X_train)
 dump(grid_dtc_acc, 'dtc-grid-search-full.joblib')
 
 # %%
-print(f'Best parameter: {grid_rf_acc.best_params_}')
+new_search = load('dtc-grid-search-full.joblib')
+new_search
+
+# %%
+print(f'Best parameter: {grid_dtc_acc.best_params_}\n')
 print(
     f'accuracy score of training set: {accuracy_score(y_train, y_pred_acc_t)}')
-print(f'accuracy score of testing set: {accuracy_score(y_test, y_pred_acc)}')
+print(f'accuracy score of testing set: {accuracy_score(y_test, y_pred_acc)}\n')
 print(classification_report(y_test, y_pred_acc))
 print(confusion_matrix(y_test, y_pred_acc))
 
