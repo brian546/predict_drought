@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import roc_curve, auc
 from sklearn.preprocessing import label_binarize, MinMaxScaler
-from statsmodels.stats.outliers_influence import variance_inflation_factor
+# from statsmodels.stats.outliers_influence import variance_inflation_factor
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 import pandas as pd
 import math
@@ -16,10 +16,13 @@ from sklearn import linear_model
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from scipy import interp
+from itertools import cycle
+
 
 # %%
 # --- import CSV
-df = pd.read_csv('test_timeseries.csv', parse_dates=['date'])
+df = pd.read_csv('../data/test_timeseries.csv', parse_dates=['date'])
 df
 # %%
 # --- convert data to mean by week, to match weekly score
@@ -34,26 +37,22 @@ week_df = week_df.drop(columns=['fips']).reset_index()
 week_df['score'] = week_df['score'].round().astype(int)
 week_df.head()
 
-
-# %%
-label = pd.read_csv('data/label.csv')
-label.T
-# %%
-# --- VIF: finding multi-collinearity issue, in case need statistics to support dropping column
+# # %%
+# # --- VIF: finding multi-collinearity issue, in case need statistics to support dropping column
 
 
-def calc_vif(X):
+# def calc_vif(X):
 
-    # Calculating VIF
-    vif = pd.DataFrame()
-    vif["variables"] = X.columns
-    vif["VIF"] = [variance_inflation_factor(
-        X.values, i) for i in range(X.shape[1])]
+#     # Calculating VIF
+#     vif = pd.DataFrame()
+#     vif["variables"] = X.columns
+#     vif["VIF"] = [variance_inflation_factor(
+#         X.values, i) for i in range(X.shape[1])]
 
-    return(vif)
+#     return(vif)
 
 
-calc_vif(week_df.iloc[:, 2:])
+# calc_vif(week_df.iloc[:, 2:])
 
 # %%
 # --- Dropping data: make comparison between 2 sets of data
@@ -236,14 +235,14 @@ y_pred_acc_t = grid_dtc_acc.predict(X_train)
 print(f'Best parameter: {grid_dtc_acc.best_params_}')
 
 
-# %%
-# --- Save model
-dump(grid_dtc_acc, 'dtc-grid-search.joblib')
+# # %%
+# # --- Save model
+# dump(grid_dtc_acc, 'dtc-grid-search.joblib')
 
-# %%
-# --- Load model
-new_search = load('dtc-grid-search.joblib')
-new_search
+# # %%
+# # --- Load model
+# new_search = load('dtc-grid-search.joblib')
+# new_search
 
 # %%
 # --- Printing reports
@@ -277,7 +276,7 @@ print(f'Best parameter: {grid_rf_acc.best_params_}')
 
 # %%
 # --- Save model
-dump(grid_rf_acc, 'rf-grid-search.joblib')
+# dump(grid_rf_acc, 'rf-grid-search.joblib')
 
 # %%
 print(f'Best parameter: {grid_rf_acc.best_params_}')
@@ -309,14 +308,6 @@ grid_dtc_acc = GridSearchCV(dtc, param_grid=grid_values, cv=5)
 grid_dtc_acc.fit(X_train, y_train)
 y_pred_acc = grid_dtc_acc.predict(X_test)
 y_pred_acc_t = grid_dtc_acc.predict(X_train)
-
-# %%
-
-dump(grid_dtc_acc, 'dtc-grid-search-full.joblib')
-
-# %%
-new_search = load('dtc-grid-search-full.joblib')
-new_search
 
 # %%
 print(f'Best parameter: {grid_dtc_acc.best_params_}\n')

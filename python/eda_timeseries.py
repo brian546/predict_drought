@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import datetime
 # %%
-df = pd.read_csv('/Users/hungyanyi/Documents/GitHub/predict_drought/data/test_timeseries.csv',parse_dates=['date'])
+df = pd.read_csv('../data/test_timeseries.csv',parse_dates=['date'])
 print(df.info())
 # %%
 print(df.isnull().sum())
@@ -83,7 +83,7 @@ plt.xlabel('Class')
 plt.xticks(rotation=0)
 
 # %%
-week_df.to_csv('/Users/hungyanyi/Documents/GitHub/predict_drought/data/week_score.csv', index=False)
+week_df.to_csv('../data/week_score.csv', index=False)
 
 plt.figure(figsize=(20,20))
 

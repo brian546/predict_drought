@@ -1,5 +1,8 @@
+# %%
+import pandas as pd
+import numpy as np
 #%%
-week_df = pd.read_csv("/Users/hungyanyi/Documents/GitHub/predict_drought/data/week_score.csv")
+week_df = pd.read_csv("../data/week_score.csv")
 week_df
 # %%
 week_df.columns

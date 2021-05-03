@@ -61,6 +61,7 @@ print('')
 print('accuracy score of training set: ', accuracy_score(y_train,y_pred_train)) 
 print('accuracy score of testing set: ',accuracy_score(y_test,y_pred_test))
 print('')
+
 # check for effect of class imbalance
 print(classification_report(y_test,y_pred_test))
 print(confusion_matrix(y_test,y_pred_test)) 
@@ -89,7 +90,6 @@ n_classes = 6
 fpr = dict()
 tpr = dict()
 roc_auc = dict()
-
 
 for i in range(n_classes):
     fpr[i], tpr[i], _ = roc_curve(y_test_bin[:, i], y_proba_test[:, i])
