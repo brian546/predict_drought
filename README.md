@@ -2,7 +2,7 @@
 
 
 ## Context
-The dataset is derived from the <a href="https://droughtmonitor.unl.edu">US drought monitor</a> The aim of the project is to help investigate if drought can be predicted based on the dataset, potentially leading to generalization of US prediction to other countries. 
+This proejct is based on Kaggle project - Predict Droughts using Weather & Soil Data. The dataset is derived from the <a href="https://droughtmonitor.unl.edu">US drought monitor</a> The aim of the project is to help investigate if drought can be predicted based on the dataset, potentially leading to generalization of US prediction to other countries. 
 
 ## Dataset
 This is a classification dataset over 6 levels of drought, from 0 (no drought) to 5 (exceptional drought). Each entry is a drought level at specific time point in a particular region in US, accompanied by the last 90 days of 18 meteorological indicators.<br/>
