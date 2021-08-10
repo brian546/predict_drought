@@ -95,6 +95,38 @@ This is a classification dataset over 6 levels of drought, from 0 (no drought) t
 </tbody>
 </table>
 
-##
+## Data Preprocessing
 
+### Take average value per week
 
+As the score of drought level is recored on Tuesday only, we took the average of other indicators in the past week as our new dataframe for prediction of drought.
+
+<br/><img width="441" alt="image" src="https://user-images.githubusercontent.com/43593664/128814783-d4a1403f-f081-4758-b4a1-7e9805d21794.png">
+
+### Round the level of drought
+Some of the level were found to be between 0 to 1. To classify the levels into 6 bins precisely (0-5), these levels were rounded.
+<br/>
+Before:
+<br/><img width="350" alt="Screenshot 2021-08-10 at 2 23 11 PM" src="https://user-images.githubusercontent.com/43593664/128818359-eb939e8a-7777-491e-9399-c3ec72b3d994.png">
+<br/>After:
+<br/><img width="349" alt="image" src="https://user-images.githubusercontent.com/43593664/128816641-797127c2-6d28-4cd6-9201-e3937aed61eb.png">
+
+## Models
+We took the 18 meteorological indicators as X and the level of drought as y. 
+
+## Model Evaluation
+
+### SGDclassifier
+<br/><img width="470" alt="image" src="https://user-images.githubusercontent.com/43593664/128818951-c95e16a5-d79c-4024-a017-b8db51270a64.png">
+<br/><img width="470" alt="image" src="https://user-images.githubusercontent.com/43593664/128818993-0b017444-efb4-41a6-a1a3-16f49fcce242.png">
+
+### Decision Tree
+<br/><img width="470" alt="image" src="https://user-images.githubusercontent.com/43593664/128819019-ae11dbe3-eadb-4da3-8d79-2633506a8fcf.png">
+<br/><img width="470" alt="image" src="https://user-images.githubusercontent.com/43593664/128819055-60c36c46-16c7-4d46-b65b-6b1f31a0c980.png">
+
+### Random Forest
+<br/><img width="470" alt="image" src="https://user-images.githubusercontent.com/43593664/128819100-153204ec-a1ef-4547-8a89-622c009c52c2.png">
+
+### XGBoost
+<br/><img width="470" alt="image" src="https://user-images.githubusercontent.com/43593664/128819129-42c14f2a-dc84-4f14-88f4-fa91bf420947.png">
+<br/><img width="470" alt="image" src="https://user-images.githubusercontent.com/43593664/128819159-58af2f84-c96a-4cdf-8bd8-f9e63aeccae5.png">
